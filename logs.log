@@ -94,3 +94,275 @@
                 ('dfs', 'passthrough'), ('pca', 'passthrough')],
          verbose=False)
 2021-06-29 00:43:18,876:INFO:setup() succesfully completed......................................
+2021-06-29 01:09:18,111:INFO:PyCaret Supervised Module
+2021-06-29 01:09:18,112:INFO:ML Usecase: anomaly
+2021-06-29 01:09:18,112:INFO:version 2.3.1
+2021-06-29 01:09:18,112:INFO:Initializing setup()
+2021-06-29 01:09:18,112:INFO:setup(target=None, ml_usecase=anomaly, available_plots={'tsne': 'Anomaly TSnE (3d)', 'umap': 'UMAP Dimensionality'}, train_size=0.7, test_data=None, preprocess=True, imputation_type=simple, iterative_imputation_iters=5, categorical_features=None, categorical_imputation=mode, categorical_iterative_imputer=lightgbm, ordinal_features=None, high_cardinality_features=None, high_cardinality_method=frequency, numeric_features=None, numeric_imputation=mean, numeric_iterative_imputer=lightgbm, date_features=None, ignore_features=None, normalize=False, normalize_method=zscore, transformation=False, transformation_method=yeo-johnson, handle_unknown_categorical=True, unknown_categorical_method=least_frequent, pca=False, pca_method=linear, pca_components=None, ignore_low_variance=False, combine_rare_levels=False, rare_level_threshold=0.1, bin_numeric_features=None, remove_outliers=False, outliers_threshold=0.05, remove_multicollinearity=False, multicollinearity_threshold=0.9, remove_perfect_collinearity=False, create_clusters=False, cluster_iter=20, polynomial_features=False, polynomial_degree=2, trigonometry_features=False, polynomial_threshold=0.1, group_features=None, group_names=None, feature_selection=False, feature_selection_threshold=0.8, feature_selection_method=classic, feature_interaction=False, feature_ratio=False, interaction_threshold=0.01, fix_imbalance=False, fix_imbalance_method=None, transform_target=False, transform_target_method=box-cox, data_split_shuffle=False, data_split_stratify=False, fold_strategy=kfold, fold=10, fold_shuffle=False, fold_groups=None, n_jobs=-1, use_gpu=False, custom_pipeline=None, html=True, session_id=None, log_experiment=False, experiment_name=None, log_plots=False, log_profile=False, log_data=False, silent=False, verbose=True, profile=False, profile_kwargs=None, display=None)
+2021-06-29 01:09:18,112:INFO:Checking environment
+2021-06-29 01:09:18,112:INFO:python_version: 3.8.3
+2021-06-29 01:09:18,112:INFO:python_build: ('default', 'Jul  2 2020 11:26:31')
+2021-06-29 01:09:18,112:INFO:machine: x86_64
+2021-06-29 01:09:18,112:INFO:platform: macOS-10.16-x86_64-i386-64bit
+2021-06-29 01:09:18,112:INFO:Memory: svmem(total=17179869184, available=6888067072, percent=59.9, used=8064761856, free=957153280, active=4988932096, inactive=5889167360, wired=3075829760)
+2021-06-29 01:09:18,112:INFO:Physical Core: 8
+2021-06-29 01:09:18,113:INFO:Logical Core: 16
+2021-06-29 01:09:18,113:INFO:Checking libraries
+2021-06-29 01:09:18,113:INFO:pd==1.0.5
+2021-06-29 01:09:18,113:INFO:numpy==1.19.5
+2021-06-29 01:09:18,113:INFO:sklearn==0.23.2
+2021-06-29 01:09:18,113:INFO:lightgbm==3.2.1
+2021-06-29 01:09:18,114:WARNING:catboost not found
+2021-06-29 01:09:18,114:WARNING:xgboost not found
+2021-06-29 01:09:18,114:INFO:mlflow==1.18.0
+2021-06-29 01:09:18,114:INFO:Checking Exceptions
+2021-06-29 01:09:18,114:INFO:Declaring global variables
+2021-06-29 01:09:18,115:INFO:USI: 9f02
+2021-06-29 01:09:18,115:INFO:pycaret_globals: {'_gpu_n_jobs_param', 'fold_groups_param_full', 'pycaret_globals', 'stratify_param', 'seed', '_all_models_internal', '_available_plots', 'n_jobs_param', 'display_container', 'fix_imbalance_param', 'imputation_regressor', 'X', 'transform_target_method_param', 'logging_param', 'transform_target_param', '_all_models', 'fold_groups_param', '_ml_usecase', 'create_model_container', 'imputation_classifier', 'data_before_preprocess', 'USI', '_all_metrics', 'html_param', 'prep_pipe', 'iterative_imputation_iters_param', 'target_param', 'fold_param', 'fix_imbalance_method_param', 'gpu_param', 'master_model_container', 'exp_name_log', '_internal_pipeline', 'fold_shuffle_param', 'fold_generator', 'log_plots_param', 'experiment__'}
+2021-06-29 01:09:18,115:INFO:Preparing display monitor
+2021-06-29 01:09:18,115:INFO:Preparing display monitor
+2021-06-29 01:09:18,126:INFO:Importing libraries
+2021-06-29 01:09:18,126:INFO:Copying data for preprocessing
+2021-06-29 01:09:18,268:INFO:Declaring preprocessing parameters
+2021-06-29 01:09:18,492:INFO:Creating preprocessing pipeline
+2021-06-29 01:09:20,625:INFO:Preprocessing pipeline created successfully
+2021-06-29 01:09:20,625:ERROR:(Process Exit): setup has been interupted with user command 'quit'. setup must rerun.
+2021-06-29 01:09:20,625:INFO:Creating global containers
+2021-06-29 01:09:20,625:INFO:Internal pipeline: Pipeline(memory=None, steps=[('empty_step', 'passthrough')], verbose=False)
+2021-06-29 01:23:56,895:INFO:PyCaret Supervised Module
+2021-06-29 01:23:56,896:INFO:ML Usecase: anomaly
+2021-06-29 01:23:56,896:INFO:version 2.3.1
+2021-06-29 01:23:56,896:INFO:Initializing setup()
+2021-06-29 01:23:56,896:INFO:setup(target=None, ml_usecase=anomaly, available_plots={'tsne': 'Anomaly TSnE (3d)', 'umap': 'UMAP Dimensionality'}, train_size=0.7, test_data=None, preprocess=True, imputation_type=simple, iterative_imputation_iters=5, categorical_features=None, categorical_imputation=mode, categorical_iterative_imputer=lightgbm, ordinal_features=None, high_cardinality_features=None, high_cardinality_method=frequency, numeric_features=None, numeric_imputation=mean, numeric_iterative_imputer=lightgbm, date_features=None, ignore_features=None, normalize=False, normalize_method=zscore, transformation=False, transformation_method=yeo-johnson, handle_unknown_categorical=True, unknown_categorical_method=least_frequent, pca=False, pca_method=linear, pca_components=None, ignore_low_variance=False, combine_rare_levels=False, rare_level_threshold=0.1, bin_numeric_features=None, remove_outliers=False, outliers_threshold=0.05, remove_multicollinearity=False, multicollinearity_threshold=0.9, remove_perfect_collinearity=False, create_clusters=False, cluster_iter=20, polynomial_features=False, polynomial_degree=2, trigonometry_features=False, polynomial_threshold=0.1, group_features=None, group_names=None, feature_selection=False, feature_selection_threshold=0.8, feature_selection_method=classic, feature_interaction=False, feature_ratio=False, interaction_threshold=0.01, fix_imbalance=False, fix_imbalance_method=None, transform_target=False, transform_target_method=box-cox, data_split_shuffle=False, data_split_stratify=False, fold_strategy=kfold, fold=10, fold_shuffle=False, fold_groups=None, n_jobs=-1, use_gpu=False, custom_pipeline=None, html=True, session_id=None, log_experiment=False, experiment_name=None, log_plots=False, log_profile=False, log_data=False, silent=False, verbose=True, profile=False, profile_kwargs=None, display=None)
+2021-06-29 01:23:56,896:INFO:Checking environment
+2021-06-29 01:23:56,896:INFO:python_version: 3.8.3
+2021-06-29 01:23:56,896:INFO:python_build: ('default', 'Jul  2 2020 11:26:31')
+2021-06-29 01:23:56,896:INFO:machine: x86_64
+2021-06-29 01:23:56,941:INFO:platform: macOS-10.16-x86_64-i386-64bit
+2021-06-29 01:23:56,941:INFO:Memory: svmem(total=17179869184, available=6798807040, percent=60.4, used=8251277312, free=625070080, active=5192486912, inactive=5931520000, wired=3058790400)
+2021-06-29 01:23:56,941:INFO:Physical Core: 8
+2021-06-29 01:23:56,942:INFO:Logical Core: 16
+2021-06-29 01:23:56,942:INFO:Checking libraries
+2021-06-29 01:23:56,942:INFO:pd==1.0.5
+2021-06-29 01:23:56,942:INFO:numpy==1.19.5
+2021-06-29 01:23:56,942:INFO:sklearn==0.23.2
+2021-06-29 01:23:56,942:INFO:lightgbm==3.2.1
+2021-06-29 01:23:56,942:WARNING:catboost not found
+2021-06-29 01:23:56,943:WARNING:xgboost not found
+2021-06-29 01:23:57,385:INFO:mlflow==1.18.0
+2021-06-29 01:23:57,386:INFO:Checking Exceptions
+2021-06-29 01:23:57,386:INFO:Declaring global variables
+2021-06-29 01:23:57,386:INFO:USI: 68ca
+2021-06-29 01:23:57,386:INFO:pycaret_globals: {'_all_models', 'seed', 'fold_param', '_available_plots', 'transform_target_method_param', 'USI', 'gpu_param', '_all_models_internal', 'fix_imbalance_param', '_all_metrics', '_internal_pipeline', 'fix_imbalance_method_param', 'data_before_preprocess', 'exp_name_log', 'fold_groups_param_full', 'iterative_imputation_iters_param', 'imputation_classifier', 'log_plots_param', 'target_param', 'create_model_container', 'pycaret_globals', 'logging_param', 'prep_pipe', 'n_jobs_param', 'fold_generator', 'transform_target_param', 'display_container', '_ml_usecase', 'fold_shuffle_param', 'fold_groups_param', 'X', 'imputation_regressor', 'stratify_param', 'html_param', 'master_model_container', '_gpu_n_jobs_param', 'experiment__'}
+2021-06-29 01:23:57,386:INFO:Preparing display monitor
+2021-06-29 01:23:57,386:INFO:Preparing display monitor
+2021-06-29 01:23:57,400:INFO:Importing libraries
+2021-06-29 01:23:57,400:INFO:Copying data for preprocessing
+2021-06-29 01:23:57,532:INFO:Declaring preprocessing parameters
+2021-06-29 01:23:57,747:INFO:Creating preprocessing pipeline
+2021-06-29 01:23:59,682:INFO:Preprocessing pipeline created successfully
+2021-06-29 01:23:59,683:ERROR:(Process Exit): setup has been interupted with user command 'quit'. setup must rerun.
+2021-06-29 01:23:59,683:INFO:Creating global containers
+2021-06-29 01:23:59,684:INFO:Internal pipeline: Pipeline(memory=None, steps=[('empty_step', 'passthrough')], verbose=False)
+2021-06-29 02:17:17,791:INFO:Creating grid variables
+2021-06-29 02:17:18,011:INFO:create_model_container: 0
+2021-06-29 02:17:18,011:INFO:master_model_container: 0
+2021-06-29 02:17:18,011:INFO:display_container: 1
+2021-06-29 02:17:18,016:INFO:Pipeline(memory=None,
+         steps=[('dtypes',
+                 DataTypes_Auto_infer(categorical_features=[],
+                                      display_types=True, features_todrop=[],
+                                      id_columns=[], ml_usecase='regression',
+                                      numerical_features=[],
+                                      target='UNSUPERVISED_DUMMY_TARGET',
+                                      time_features=[])),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='most frequent',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None...
+                ('scaling', 'passthrough'), ('P_transform', 'passthrough'),
+                ('binn', 'passthrough'), ('rem_outliers', 'passthrough'),
+                ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='UNSUPERVISED_DUMMY_TARGET')),
+                ('fix_perfect', 'passthrough'),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough')],
+         verbose=False)
+2021-06-29 02:17:18,016:INFO:setup() succesfully completed......................................
+2021-06-29 02:21:07,556:INFO:Initializing create_model()
+2021-06-29 02:21:07,557:INFO:create_model(estimator=pca, num_clusters=4, fraction=0.05, ground_truth=None, round=4, fit_kwargs=None, verbose=True, system=True, raise_num_clusters=False, display=None, kwargs={})
+2021-06-29 02:21:07,557:INFO:Checking exceptions
+2021-06-29 02:21:07,557:INFO:Preparing display monitor
+2021-06-29 02:21:07,569:INFO:Importing libraries
+2021-06-29 02:21:07,576:INFO:Importing untrained model
+2021-06-29 02:21:07,584:INFO:Principal Component Analysis Imported succesfully
+2021-06-29 02:21:07,592:INFO:Fitting Model
+2021-06-29 02:21:13,785:INFO:PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=346, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False)
+2021-06-29 02:21:13,785:INFO:create_models() succesfully completed......................................
+2021-06-29 02:21:13,786:INFO:Uploading results into container
+2021-06-29 02:21:13,786:INFO:Uploading model into container now
+2021-06-29 02:21:13,787:INFO:create_model_container: 1
+2021-06-29 02:21:13,787:INFO:master_model_container: 1
+2021-06-29 02:21:13,787:INFO:display_container: 2
+2021-06-29 02:21:13,788:INFO:PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=346, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False)
+2021-06-29 02:21:13,788:INFO:create_model() succesfully completed......................................
+2021-06-29 02:23:25,889:INFO:Initializing plot_model()
+2021-06-29 02:23:25,890:INFO:plot_model(plot=tsne, fold=None, use_train_data=False, verbose=True, is_in_evaluate=False, display=None, display_format=None, estimator=PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=346, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False), feature_name=None, fit_kwargs=None, groups=None, label=False, save=False, scale=1, system=True)
+2021-06-29 02:23:25,890:INFO:Checking exceptions
+2021-06-29 02:23:25,890:INFO:Preparing display monitor
+2021-06-29 02:23:25,896:INFO:Preloading libraries
+2021-06-29 02:23:25,905:INFO:Copying training dataset
+2021-06-29 02:23:26,079:INFO:Plot type: tsne
+2021-06-29 02:23:31,242:INFO:SubProcess assign_model() called ==================================
+2021-06-29 02:23:31,242:INFO:Initializing assign_model()
+2021-06-29 02:23:31,242:INFO:assign_model(model=PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=346, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False), transformation=True, score=False, verbose=False)
+2021-06-29 02:23:31,242:INFO:Checking exceptions
+2021-06-29 02:23:31,242:INFO:Determining Trained Model
+2021-06-29 02:23:31,243:INFO:Trained Model : Principal Component Analysis
+2021-06-29 02:23:31,243:INFO:Copying data
+2021-06-29 02:23:31,373:INFO:Transformation param set to True. Assigned clusters are attached on transformed dataset.
+2021-06-29 02:23:31,385:INFO:(1240227, 45)
+2021-06-29 02:23:31,386:INFO:assign_model() succesfully completed......................................
+2021-06-29 02:23:31,602:INFO:SubProcess assign_model() end ==================================
+2021-06-29 02:23:32,242:INFO:Getting dummies to cast categorical variables
+2021-06-29 02:23:32,242:INFO:Fitting TSNE()
+2021-06-29 02:46:40,599:INFO:PyCaret Supervised Module
+2021-06-29 02:46:40,600:INFO:ML Usecase: anomaly
+2021-06-29 02:46:40,600:INFO:version 2.3.1
+2021-06-29 02:46:40,600:INFO:Initializing setup()
+2021-06-29 02:46:40,600:INFO:setup(target=None, ml_usecase=anomaly, available_plots={'tsne': 'Anomaly TSnE (3d)', 'umap': 'UMAP Dimensionality'}, train_size=0.7, test_data=None, preprocess=True, imputation_type=simple, iterative_imputation_iters=5, categorical_features=None, categorical_imputation=mode, categorical_iterative_imputer=lightgbm, ordinal_features=None, high_cardinality_features=None, high_cardinality_method=frequency, numeric_features=None, numeric_imputation=mean, numeric_iterative_imputer=lightgbm, date_features=None, ignore_features=None, normalize=False, normalize_method=zscore, transformation=False, transformation_method=yeo-johnson, handle_unknown_categorical=True, unknown_categorical_method=least_frequent, pca=False, pca_method=linear, pca_components=None, ignore_low_variance=False, combine_rare_levels=False, rare_level_threshold=0.1, bin_numeric_features=None, remove_outliers=False, outliers_threshold=0.05, remove_multicollinearity=False, multicollinearity_threshold=0.9, remove_perfect_collinearity=False, create_clusters=False, cluster_iter=20, polynomial_features=False, polynomial_degree=2, trigonometry_features=False, polynomial_threshold=0.1, group_features=None, group_names=None, feature_selection=False, feature_selection_threshold=0.8, feature_selection_method=classic, feature_interaction=False, feature_ratio=False, interaction_threshold=0.01, fix_imbalance=False, fix_imbalance_method=None, transform_target=False, transform_target_method=box-cox, data_split_shuffle=False, data_split_stratify=False, fold_strategy=kfold, fold=10, fold_shuffle=False, fold_groups=None, n_jobs=-1, use_gpu=False, custom_pipeline=None, html=True, session_id=None, log_experiment=False, experiment_name=None, log_plots=False, log_profile=False, log_data=False, silent=False, verbose=True, profile=False, profile_kwargs=None, display=None)
+2021-06-29 02:46:40,600:INFO:Checking environment
+2021-06-29 02:46:40,600:INFO:python_version: 3.8.3
+2021-06-29 02:46:40,600:INFO:python_build: ('default', 'Jul  2 2020 11:26:31')
+2021-06-29 02:46:40,600:INFO:machine: x86_64
+2021-06-29 02:46:40,644:INFO:platform: macOS-10.16-x86_64-i386-64bit
+2021-06-29 02:46:40,644:INFO:Memory: svmem(total=17179869184, available=6517526528, percent=62.1, used=9102643200, free=108617728, active=6128226304, inactive=6164398080, wired=2974416896)
+2021-06-29 02:46:40,644:INFO:Physical Core: 8
+2021-06-29 02:46:40,644:INFO:Logical Core: 16
+2021-06-29 02:46:40,645:INFO:Checking libraries
+2021-06-29 02:46:40,645:INFO:pd==1.0.5
+2021-06-29 02:46:40,645:INFO:numpy==1.19.5
+2021-06-29 02:46:40,645:INFO:sklearn==0.23.2
+2021-06-29 02:46:40,645:INFO:lightgbm==3.2.1
+2021-06-29 02:46:40,645:WARNING:catboost not found
+2021-06-29 02:46:40,645:WARNING:xgboost not found
+2021-06-29 02:46:41,087:INFO:mlflow==1.18.0
+2021-06-29 02:46:41,087:INFO:Checking Exceptions
+2021-06-29 02:46:41,088:INFO:Declaring global variables
+2021-06-29 02:46:41,088:INFO:USI: 3381
+2021-06-29 02:46:41,088:INFO:pycaret_globals: {'_available_plots', 'transform_target_param', 'create_model_container', '_ml_usecase', 'experiment__', 'log_plots_param', 'fold_generator', 'html_param', '_all_models_internal', 'seed', 'pycaret_globals', 'USI', 'fold_groups_param', '_all_metrics', 'fold_shuffle_param', 'fix_imbalance_param', 'stratify_param', 'X', 'gpu_param', 'imputation_regressor', 'transform_target_method_param', 'prep_pipe', 'display_container', 'iterative_imputation_iters_param', 'exp_name_log', 'master_model_container', 'n_jobs_param', '_gpu_n_jobs_param', '_all_models', 'target_param', 'fix_imbalance_method_param', 'fold_groups_param_full', 'data_before_preprocess', 'imputation_classifier', 'logging_param', '_internal_pipeline', 'fold_param'}
+2021-06-29 02:46:41,088:INFO:Preparing display monitor
+2021-06-29 02:46:41,088:INFO:Preparing display monitor
+2021-06-29 02:46:41,102:INFO:Importing libraries
+2021-06-29 02:46:41,102:INFO:Copying data for preprocessing
+2021-06-29 02:46:41,244:INFO:Declaring preprocessing parameters
+2021-06-29 02:46:41,533:INFO:Creating preprocessing pipeline
+2021-06-29 02:46:43,948:INFO:Preprocessing pipeline created successfully
+2021-06-29 02:46:43,948:ERROR:(Process Exit): setup has been interupted with user command 'quit'. setup must rerun.
+2021-06-29 02:46:43,948:INFO:Creating global containers
+2021-06-29 02:46:43,950:INFO:Internal pipeline: Pipeline(memory=None, steps=[('empty_step', 'passthrough')], verbose=False)
+2021-06-29 03:32:59,547:INFO:Creating grid variables
+2021-06-29 03:32:59,671:INFO:create_model_container: 0
+2021-06-29 03:32:59,672:INFO:master_model_container: 0
+2021-06-29 03:32:59,672:INFO:display_container: 1
+2021-06-29 03:32:59,676:INFO:Pipeline(memory=None,
+         steps=[('dtypes',
+                 DataTypes_Auto_infer(categorical_features=[],
+                                      display_types=True, features_todrop=[],
+                                      id_columns=[], ml_usecase='regression',
+                                      numerical_features=[],
+                                      target='UNSUPERVISED_DUMMY_TARGET',
+                                      time_features=[])),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='most frequent',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None...
+                ('scaling', 'passthrough'), ('P_transform', 'passthrough'),
+                ('binn', 'passthrough'), ('rem_outliers', 'passthrough'),
+                ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='UNSUPERVISED_DUMMY_TARGET')),
+                ('fix_perfect', 'passthrough'),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough')],
+         verbose=False)
+2021-06-29 03:32:59,676:INFO:setup() succesfully completed......................................
+2021-06-29 03:33:02,221:INFO:Initializing create_model()
+2021-06-29 03:33:02,221:INFO:create_model(estimator=pca, num_clusters=4, fraction=0.05, ground_truth=None, round=4, fit_kwargs=None, verbose=True, system=True, raise_num_clusters=False, display=None, kwargs={})
+2021-06-29 03:33:02,221:INFO:Checking exceptions
+2021-06-29 03:33:02,222:INFO:Preparing display monitor
+2021-06-29 03:33:02,233:INFO:Importing libraries
+2021-06-29 03:33:02,241:INFO:Importing untrained model
+2021-06-29 03:33:02,250:INFO:Principal Component Analysis Imported succesfully
+2021-06-29 03:33:02,259:INFO:Fitting Model
+2021-06-29 03:33:06,943:INFO:PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=6755, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False)
+2021-06-29 03:33:06,943:INFO:create_models() succesfully completed......................................
+2021-06-29 03:33:06,943:INFO:Uploading results into container
+2021-06-29 03:33:06,944:INFO:Uploading model into container now
+2021-06-29 03:33:06,945:INFO:create_model_container: 1
+2021-06-29 03:33:06,945:INFO:master_model_container: 1
+2021-06-29 03:33:06,945:INFO:display_container: 2
+2021-06-29 03:33:06,945:INFO:PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=6755, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False)
+2021-06-29 03:33:06,945:INFO:create_model() succesfully completed......................................
+2021-06-29 03:33:08,559:INFO:Initializing predict_model()
+2021-06-29 03:33:08,559:INFO:predict_model(estimator=PCA(contamination=0.05, copy=True, iterated_power='auto', n_components=None,
+  n_selected_components=None, random_state=6755, standardization=True,
+  svd_solver='auto', tol=0.0, weighted=True, whiten=False), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 09:27:59,585:INFO:Initializing create_model()
+2021-06-29 09:27:59,587:INFO:create_model(estimator=knn, num_clusters=4, fraction=0.05, ground_truth=None, round=4, fit_kwargs=None, verbose=True, system=True, raise_num_clusters=False, display=None, kwargs={})
+2021-06-29 09:27:59,587:INFO:Checking exceptions
+2021-06-29 09:27:59,587:INFO:Preparing display monitor
+2021-06-29 09:27:59,598:INFO:Importing libraries
+2021-06-29 09:27:59,605:INFO:Importing untrained model
+2021-06-29 09:27:59,613:INFO:K-Nearest Neighbors Detector Imported succesfully
+2021-06-29 09:27:59,620:INFO:Fitting Model
+2021-06-29 10:38:30,809:INFO:KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0)
+2021-06-29 10:38:30,811:INFO:create_models() succesfully completed......................................
+2021-06-29 10:38:30,812:INFO:Uploading results into container
+2021-06-29 10:38:30,813:INFO:Uploading model into container now
+2021-06-29 10:38:30,814:INFO:create_model_container: 2
+2021-06-29 10:38:30,814:INFO:master_model_container: 2
+2021-06-29 10:38:30,814:INFO:display_container: 3
+2021-06-29 10:38:30,814:INFO:KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0)
+2021-06-29 10:38:30,814:INFO:create_model() succesfully completed......................................
+2021-06-29 10:38:32,775:INFO:Initializing predict_model()
+2021-06-29 10:38:32,776:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 13:08:17,915:INFO:Initializing predict_model()
+2021-06-29 13:08:17,916:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 17:27:19,342:INFO:Initializing predict_model()
+2021-06-29 17:27:19,344:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 17:27:35,374:INFO:Initializing predict_model()
+2021-06-29 17:27:35,374:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 17:45:16,084:INFO:Initializing predict_model()
+2021-06-29 17:45:16,085:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
+2021-06-29 17:45:21,530:INFO:Initializing predict_model()
+2021-06-29 17:45:21,530:INFO:predict_model(estimator=KNN(algorithm='auto', contamination=0.05, leaf_size=30, method='largest',
+  metric='minkowski', metric_params=None, n_jobs=-1, n_neighbors=5, p=2,
+  radius=1.0), ml_usecase=MLUsecase.ANOMALY)
