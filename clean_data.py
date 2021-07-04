@@ -3,15 +3,16 @@ import re
 
 
 def parse_http_agent(http_agent):
-    regex = r'(?<=\().+?(?=\))'
-    in_bracket_dict_values = re.findall(regex, http_agent)
-    result_values = []
-    for value in in_bracket_dict_values:
-        result_values.append(value.split('; '))
-        http_agent = http_agent.replace(f' ({value})', '')
-
-    result_values += http_agent.split()
-    return result_values
+    return http_agent
+    # regex = r'(?<=\().+?(?=\))'
+    # in_bracket_dict_values = re.findall(regex, http_agent)
+    # result_values = []
+    # for value in in_bracket_dict_values:
+    #     result_values.append(value.split('; '))
+    #     http_agent = http_agent.replace(f' ({value})', '')
+    # 
+    # result_values += http_agent.split()
+    # return result_values
 
 
 def parse(line: str):
