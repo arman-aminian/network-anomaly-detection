@@ -73,9 +73,11 @@ def preprocess(session):
                       'is_bot': is_bot(temp)
                       },
                      ignore_index=True)
-    return res
+    return res.iloc[-1]
 
 def is_anomaly(model, req):
+    parsed_lines = list(map(parse, req))[0]
+    pd.DataFrame.from_dict([parsed_lines])
 
     if incoming_req_hashtable[get_req_unique_str(req)] is None:
         incoming_req_hashtable[get_req_unique_str(req)] = [req]
