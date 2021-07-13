@@ -1,10 +1,5 @@
-# pip install pyyaml ua-parser user-agents
-
 import numpy as np
 np.random.seed(42)
-import pandas as pd
-from pandas import Timestamp
-from user_agents import parse
 import tensorflow as tf
 tf.config.experimental_run_functions_eagerly(True)
 tf.random.set_seed(42)
@@ -27,8 +22,6 @@ from utils import dataLoading, aucPerformance, writeResults, get_data_from_svmli
 from sklearn.model_selection import train_test_split
 
 import time
-import json
-import re
 
 MAX_INT = np.iinfo(np.int32).max
 data_format = 0
@@ -330,237 +323,21 @@ def run_devnet(args):
         writeResults(filename+'_'+str(network_depth), x.shape[0], x.shape[1], n_samples_trn, n_outliers_org, n_outliers,
                      network_depth, mean_auc, mean_aucpr, std_auc, std_aucpr, train_time, test_time, path=args.output)
 
-def load_model_weight_predict(model_name, input_shape, network_depth, x_test):
-    '''
-    load the saved weights to make predictions
-    '''
-    model = deviation_network(input_shape, network_depth)
-    model.load_weights(model_name)
-    scoring_network = Model(inputs=model.input, outputs=model.output)    
-    scores = scoring_network.predict(x_test)
 
-
-def parse_http_agent(http_agent):
-    return http_agent
-
-
-def req_parse(line: str):
-    line = line.replace('[[', '[').replace(']]', ']')
-    normal_dict_keys = ('ip', 'status_code', 'request_length', 'request_time',)
-    in_bracket_dict_keys = ('datetime', 'method_and_url', 'http_user_agent')
-    result_dict = dict()
-    regex = r'(?<=\[).+?(?=\])'
-    in_bracket_dict_values = re.findall(regex, line)
-    for i in range(len(in_bracket_dict_keys)):
-        result_dict[in_bracket_dict_keys[i]] = in_bracket_dict_values[i]
-        line = line.replace(f' [{in_bracket_dict_values[i]}]', '')
-    normal_dict_values = line.split()
-    for i in range(len(normal_dict_keys)):
-        result_dict[normal_dict_keys[i]] = normal_dict_values[i]
-
-    result_dict['http_method'], result_dict['url'] = result_dict.pop('method_and_url').split()
-    result_dict['http_user_agent'] = parse_http_agent(result_dict['http_user_agent'])
-    return result_dict
-
-
-
-"""# Helper Functions"""
-
-def get_root(s):
-    if s.startswith('/') and len(s) > 1:
-        s = s[1:]
-    if len(s) > 1:
-        s = s[:s.find('/')]
-    return s
-
-def get_path_roots(urls, min_samples_per_root=1000):
-    t = [get_root(s) for s in urls]
-
-    t = ['ROBOTS' if 'robots' in s else s for s in t]
-    t = ['NUM' if s.isnumeric() else s for s in t]
-
-    t2 = pd.Series(t).value_counts()[pd.Series(t).value_counts().values > min_samples_per_root]
-    if 'ROBOTS' not in t2:
-        roots = np.concatenate((t2.index.values, ['ROBOTS']))
-        values = np.concatenate((t2.values, [pd.Series(t).value_counts()['ROBOTS']]))
-    else:
-        roots = np.array(t2.index.values)
-        values = np.array(t2.values)
-    return roots, values
-
-def convert_urls_to_roots(urls, min_samples_per_root=1000):
-    t = [get_root(s) for s in urls]
-
-    t = ['ROBOTS' if 'robots' in s else s for s in t]
-    t = ['NUM' if s.isnumeric() else s for s in t]
-
-    t2 = pd.Series(t).value_counts()[pd.Series(t).value_counts().values > MIN_PATH_ROOT_SAMPLE]
-    if 'ROBOTS' not in t2:
-        roots = np.concatenate((t2.index.values, ['ROBOTS']))
-    else:
-        roots = np.array(t2.index.values)
-    t = pd.Series([s if s in roots else 'OTHER' for s in t])
-    return t
-
-def get_categorical_status_code_counts(status_codes):
-    status_counts = np.zeros(5)
-    for i in range(status_codes.nunique()):
-        status_counts[int(np.floor(int(status_codes.value_counts().index[i]) / 100) - 1)] += status_codes.value_counts().values[i]
-    return status_counts
-
-def isnumeric(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
-
-"""# Session helper functions"""
-
-def get_max_click_rate(session):
-    m = 0
-    session = session[session.url.apply(lambda x: 'pages' in x)]
-    for l in session.datetime:
-        m = max(m, len(session[(session.datetime >= l) &
-                               (session.datetime <= l + timedelta(seconds=TIME_WINDOW))]))
-    return m
-
-def get_duration(session):
-    return (Timestamp(session.datetime.iloc[-1]) - Timestamp(session.datetime.iloc[0])).seconds
-
-def get_image_freq(session):
-    t = [get_root(s) for s in session.url]
-    return t.count('images') / len(t)
-
-def get_4xx_freq(session):
-    status_counts = get_categorical_status_code_counts(session.status_code)
-    return status_counts[3] / len(session)
-
-def get_page_freq(session):
-    t = [get_root(s) for s in session.url]
-    return (t.count('pages') + t.count('php') + t.count('asp')) / len(t)
-
-def get_head_freq(session):
-    return len(session[session.http_method == 'Head']) / len(session)
-
-def has_robots_req(session):
-    t = ['robots' in s for s in session.url]
-    return int(sum(t) > 0)
-
-def is_bot(session):
-    user_agent = parse(session.http_user_agent.iloc[0])
-    return int(user_agent.is_bot)
-
-"""# Preprocess"""
-
-def preprocess(session):
-    res = pd.DataFrame(columns=['head_freq', 'req_num', 'img_freq',
-                                'page_freq', 'status_4xx_freq', 'max_click_rate',
-                                'has_robots', 'duration'])
-    temp = []
-    for i in range(len(session)):
-        if len(temp) > 0 and (session.datetime.iloc[i] - session.datetime.iloc[i - 1]).seconds > SESSION_THRESHOLD:
-            temp = pd.DataFrame(temp)
-            res = res.append({'head_freq': get_head_freq(temp),
-                              'req_num': len(temp),
-                              'img_freq': get_image_freq(temp),
-                              'page_freq': get_page_freq(temp),
-                              'status_4xx_freq': get_4xx_freq(temp),
-                              'max_click_rate': get_max_click_rate(temp),
-                              'has_robots': has_robots_req(temp),
-                              'duration': get_duration(temp),
-                              'is_bot': is_bot(temp)
-                              },
-                             ignore_index=True)
-            temp = []
-        temp.append(session.iloc[i])
-    temp = pd.DataFrame(temp)
-    res = res.append({'head_freq': get_head_freq(temp),
-                      'req_num': len(temp),
-                      'img_freq': get_image_freq(temp),
-                      'page_freq': get_page_freq(temp),
-                      'status_4xx_freq': get_4xx_freq(temp),
-                      'max_click_rate': get_max_click_rate(temp),
-                      'has_robots': has_robots_req(temp),
-                      'duration': get_duration(temp),
-                      'is_bot': is_bot(temp)
-                      },
-                     ignore_index=True)
-    
-    # res = res[res.req_num >= 5]
-    if len(res) == 0:
-      return -1
-
-    res['req_freq'] = res.req_num / (res.duration + 0.001)
-
-    return res.iloc[-1]
-
-# lines = ['207.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/1026106239] 304 0 [[Googlebot-Image/1.0]] 32']
-# parsed_lines = list(map(req_parse, lines))[0]
-
-# parsed_pd = pd.DataFrame.from_dict([parsed_lines])
-
-# preprocessed_data = preprocess(parsed_pd)
-
-# preprocessed_data = preprocessed_data.astype(np.float32)
-
-"""# Load trained Model"""
-
-def load_model_weight(model_name, input_shape, network_depth, x_test):
-    model = deviation_network(input_shape, network_depth)
-    model.load_weights(model_name)
-    scoring_network = Model(inputs=model.input, outputs=model.output)    
-    return scoring_network
-
-
-# model.predict(preprocessed_data.values.reshape(1, 10))
-
-def is_anomaly( model, request, threshold ):
-  lines = [request]
-  parsed_lines = list(map(req_parse, lines))[0]
-  parsed_pd = pd.DataFrame.from_dict([parsed_lines])
-  preprocessed_data = preprocess(parsed_pd)
-  preprocessed_data = preprocessed_data.astype(np.float32)
-  score = model.predict(preprocessed_data.values.reshape(1, 10))
-  return score[0,0] > threshold
-
-# model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
-# x = '207.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/1026106239] 304 0 [[Googlebot-Image/1.0]] 32'
-# is_anomaly(model, x, 5)
-
-"""# System Architecture"""
-
-incoming_req_hashtable = {}
-discovered_robots = set()
-
-model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
-
-def get_req_unique_str( req ):
-    return str(req.http_user_agent + ' - ' + req.ip)
-
-def request_validate( req ):
-  lines = [req]
-  parsed_lines = list(map(req_parse, lines))[0]
-  req_pd = pd.DataFrame.from_dict([parsed_lines])
-
-  if get_req_unique_str(req_pd) in discovered_robots:
-    return True
-  
-  if get_req_unique_str(req_pd) not in incoming_req_hashtable.keys():
-    incoming_req_hashtable[get_req_unique_str(req_pd)] = [req_pd]
-  elif len(incoming_req_hashtable[get_req_unique_str(req_pd)]) >= 5:
-    anomaly = is_anomaly(model, req, 5.1)
-    if anomaly:
-      discovered_robots.add(get_req_unique_str(req_pd))
-    return ~anomaly
-    # incoming_req_hashtable[get_req_unique_str(req_pd)] = incoming_req_hashtable[get_req_unique_str(req_pd)][-len(preprocessed):]
-  else:
-    incoming_req_hashtable[get_req_unique_str(req_pd)].append(req_pd)
-  return True
-
-x = '217.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/robots.txt] 304 0 [[Googlebot-Image/1.0]] 32'
-
-request_validate(x)
-
-# discovered_robots
+      
+parser = argparse.ArgumentParser()
+parser.add_argument("--network_depth", choices=['1','2', '4'], default='2', help="the depth of the network architecture")
+parser.add_argument("--batch_size", type=int, default=512, help="batch size used in SGD")
+parser.add_argument("--nb_batch", type=int, default=20, help="the number of batches per epoch")
+parser.add_argument("--epochs", type=int, default=50, help="the number of epochs")
+parser.add_argument("--runs", type=int, default=10, help="how many times we repeat the experiments to obtain the average performance")
+parser.add_argument("--known_outliers", type=int, default=30, help="the number of labeled outliers available at hand")
+parser.add_argument("--cont_rate", type=float, default=0.02, help="the outlier contamination rate in the training data")
+parser.add_argument("--input_path", type=str, default='./dataset/', help="the path of the data sets")
+parser.add_argument("--data_set", type=str, default='annthyroid_21feat_normalised', help="a list of data set names")
+parser.add_argument("--data_format", choices=['0','1'], default='0',  help="specify whether the input data is a csv (0) or libsvm (1) data format")
+parser.add_argument("--output", type=str, default='./results/devnet_auc_performance_30outliers_0.02contrate_2depth_10runs.csv', help="the output file path")
+parser.add_argument("--ramdn_seed", type=int, default=42, help="the random seed number")
+args = parser.parse_args()
+run_devnet(args)
 
