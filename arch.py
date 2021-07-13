@@ -9,6 +9,7 @@ import tensorflow as tf
 tf.config.experimental_run_functions_eagerly(True)
 tf.random.set_seed(42)
 sess = tf.compat.v1.Session()
+from sklearn.preprocessing import MinMaxScaler
 
 from keras import regularizers
 from keras import backend as K
@@ -340,6 +341,7 @@ def load_model_weight_predict(model_name, input_shape, network_depth, x_test):
     scores = scoring_network.predict(x_test)
 
 
+
 def parse_http_agent(http_agent):
     return http_agent
 
@@ -453,6 +455,11 @@ def is_bot(session):
 
 """# Preprocess"""
 
+train_data = pd.read_csv('./dataset/training_data.csv', index_col=0)
+# train_data.head()
+
+scalar = MinMaxScaler().fit(train_data)
+
 def preprocess(session):
     res = pd.DataFrame(columns=['head_freq', 'req_num', 'img_freq',
                                 'page_freq', 'status_4xx_freq', 'max_click_rate',
@@ -493,16 +500,20 @@ def preprocess(session):
 
     res['req_freq'] = res.req_num / (res.duration + 0.001)
 
+    res = scalar.transform(res)
+    res = pd.DataFrame(res)
+    
     return res.iloc[-1]
 
-# lines = ['207.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/1026106239] 304 0 [[Googlebot-Image/1.0]] 32']
-# parsed_lines = list(map(req_parse, lines))[0]
+lines = ['207.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/1026106239] 304 0 [[Googlebot-Image/1.0]] 32']
+parsed_lines = list(map(req_parse, lines))[0]
 
-# parsed_pd = pd.DataFrame.from_dict([parsed_lines])
+parsed_pd = pd.DataFrame.from_dict([parsed_lines])
 
-# preprocessed_data = preprocess(parsed_pd)
+preprocessed_data = preprocess(parsed_pd)
 
-# preprocessed_data = preprocessed_data.astype(np.float32)
+preprocessed_data = preprocessed_data.astype(np.float32)
+preprocessed_data
 
 """# Load trained Model"""
 
@@ -512,6 +523,7 @@ def load_model_weight(model_name, input_shape, network_depth, x_test):
     scoring_network = Model(inputs=model.input, outputs=model.output)    
     return scoring_network
 
+# model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
 
 # model.predict(preprocessed_data.values.reshape(1, 10))
 
@@ -524,7 +536,6 @@ def is_anomaly( model, request, threshold ):
   score = model.predict(preprocessed_data.values.reshape(1, 10))
   return score[0,0] > threshold
 
-# model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
 # x = '207.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/1026106239] 304 0 [[Googlebot-Image/1.0]] 32'
 # is_anomaly(model, x, 5)
 
@@ -544,7 +555,7 @@ def request_validate( req ):
   req_pd = pd.DataFrame.from_dict([parsed_lines])
 
   if get_req_unique_str(req_pd) in discovered_robots:
-    return True
+    return False
   
   if get_req_unique_str(req_pd) not in incoming_req_hashtable.keys():
     incoming_req_hashtable[get_req_unique_str(req_pd)] = [req_pd]
