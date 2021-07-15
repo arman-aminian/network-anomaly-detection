@@ -543,6 +543,7 @@ def is_anomaly( model, request, threshold ):
 
 incoming_req_hashtable = {}
 discovered_robots = set()
+input_shape = (10,)
 
 model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
 
