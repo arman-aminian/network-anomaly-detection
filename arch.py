@@ -1,4 +1,9 @@
-# pip install pyyaml ua-parser user-agents
+ # pip install pyyaml ua-parser user-agents
+
+from redis import StrictRedis
+import json
+from flask import Flask, request
+
 
 import numpy as np
 np.random.seed(42)
@@ -28,7 +33,6 @@ from utils import dataLoading, aucPerformance, writeResults, get_data_from_svmli
 from sklearn.model_selection import train_test_split
 
 import time
-import json
 import re
 
 MAX_INT = np.iinfo(np.int32).max
@@ -541,8 +545,8 @@ def is_anomaly( model, request, threshold ):
 
 """# System Architecture"""
 
-incoming_req_hashtable = {}
-discovered_robots = set()
+# incoming_req_hashtable = {}
+# discovered_robots = set()
 input_shape = (10,)
 
 model = load_model_weight('./model/devnet_prepared_ds_0.02cr_512bs_690ko_2d-2.h5', input_shape, 2, preprocessed_data.values.reshape(1, 10))
@@ -554,25 +558,69 @@ def request_validate( req ):
   lines = [req]
   parsed_lines = list(map(req_parse, lines))[0]
   req_pd = pd.DataFrame.from_dict([parsed_lines])
+  redis_key = get_req_unique_str(req_pd)
 
-  if get_req_unique_str(req_pd) in discovered_robots:
+  discovered_robots = set(get_list_from_redis('discovered_robots', list()))
+  if redis_key in discovered_robots:
     return False
-  
-  if get_req_unique_str(req_pd) not in incoming_req_hashtable.keys():
-    incoming_req_hashtable[get_req_unique_str(req_pd)] = [req_pd]
-  elif len(incoming_req_hashtable[get_req_unique_str(req_pd)]) >= 5:
+
+  incoming_req = get_list_from_redis(redis_key, list())
+  if len(incoming_req) >= 5:
     anomaly = is_anomaly(model, req, 5.1)
-    if anomaly:
-      discovered_robots.add(get_req_unique_str(req_pd))
+    if anomaly:  
+      discovered_robots.add(redis_key)
+      add_list_to_redis('discovered_robots', list(discovered_robots))
     return ~anomaly
-    # incoming_req_hashtable[get_req_unique_str(req_pd)] = incoming_req_hashtable[get_req_unique_str(req_pd)][-len(preprocessed):]
-  else:
-    incoming_req_hashtable[get_req_unique_str(req_pd)].append(req_pd)
+  incoming_req.append(req_pd)
+  add_list_to_redis(redis_key, incoming_req)
   return True
+
+
+  # if get_req_unique_str(req_pd) not in incoming_req_hashtable.keys():
+  #   incoming_req_hashtable[get_req_unique_str(req_pd)] = [req_pd]
+  # elif len(incoming_req_hashtable[get_req_unique_str(req_pd)]) >= 5:
+  #   anomaly = is_anomaly(model, req, 5.1)
+  #   if anomaly:
+  #     discovered_robots.add(get_req_unique_str(req_pd))
+  #   return ~anomaly
+  #   # incoming_req_hashtable[get_req_unique_str(req_pd)] = incoming_req_hashtable[get_req_unique_str(req_pd)][-len(preprocessed):]
+  # else:
+  #   incoming_req_hashtable[get_req_unique_str(req_pd)].append(req_pd)
+  # return True
 
 x = '217.213.193.143 [2021-5-12T5:6:0.0+0430] [Get /cdn/profiles/robots.txt] 304 0 [[Googlebot-Image/1.0]] 32'
 
 request_validate(x)
+
+
+redis_cli = StrictRedis(host='localhost', port=6379, db=0)
+
+def add_list_to_redis(key, value):
+    redis_cli.set(key, json.dumps(value))
+
+
+def get_list_from_redis(key, default=None):
+    value = redis_cli.get(key)
+    if value is None:
+        return default
+    return json.loads(value)
+
+
+app = Flask(__name__)
+
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    request_json = request.json()
+    http_req_log = request_json['http_req_log']
+    response = request_validate(http_req_log)
+    return {'response': response}
+
+
+if __name__ == '__main__':
+    app.run()
+
+
 
 # discovered_robots
 
